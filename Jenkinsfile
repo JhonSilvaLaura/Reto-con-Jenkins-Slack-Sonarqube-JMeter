@@ -20,6 +20,7 @@ pipeline {
         JMETER_HOME = '/opt/jmeter'
         JMETER_PLAN = 'jmeter/Reto_Carga_100Usuarios.jmx'
         JMETER_OUT  = 'evidencias/04-jmeter'
+        SLACK_CHANNEL = 'C08P7ME3HT8'
     }
 
     stages {
@@ -124,6 +125,7 @@ pipeline {
                 def color = resultado == 'SUCCESS' ? '#36a64f' : '#d00000'
                 def estado = resultado == 'SUCCESS' ? 'EXITOSA' : 'FALLIDA'
                 def payload = [
+                    channel: "${env.SLACK_CHANNEL}",
                     text: ":rocket: *Pipeline de Calidad - Reto S11 | AP5*",
                     attachments: [[
                         color: color,
@@ -139,8 +141,15 @@ pipeline {
                 ]
                 writeFile file: 'slack-message.json', text: groovy.json.JsonOutput.toJson(payload)
 
-                withCredentials([string(credentialsId: 'slack-webhook-url', variable: 'SLACK_WEBHOOK_URL')]) {
-                    sh 'curl -sS -X POST -H "Content-type: application/json" --data @slack-message.json "$SLACK_WEBHOOK_URL"'
+                withCredentials([string(credentialsId: 'slack-bot-token', variable: 'SLACK_BOT_TOKEN')]) {
+                    sh '''
+                        curl -sS -X POST \
+                          -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+                          -H "Content-type: application/json; charset=utf-8" \
+                          --data @slack-message.json \
+                          https://slack.com/api/chat.postMessage
+                        echo
+                    '''
                 }
                 echo "Notificacion Slack enviada (${estado})"
             }
