@@ -7,9 +7,10 @@
     <scm class="hudson.plugins.git.GitSCM" plugin="git">
       <configVersion>2</configVersion>
       <userRemoteConfigs>
-        <userRemoteConfigs>
+        <hudson.plugins.git.UserRemoteConfig>
           <url>https://github.com/JhonSilvaLaura/Reto-con-Jenkins-Slack-Sonarqube-JMeter.git</url>
-        </userRemoteConfigs>
+          <credentialsId></credentialsId>
+        </hudson.plugins.git.UserRemoteConfig>
       </userRemoteConfigs>
       <branches>
         <hudson.plugins.git.BranchSpec>
