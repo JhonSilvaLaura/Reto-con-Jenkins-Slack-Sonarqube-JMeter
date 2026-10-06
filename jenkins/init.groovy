@@ -3,7 +3,10 @@ import hudson.util.Secret
 import com.cloudbees.plugins.credentials.CredentialsScope
 import com.cloudbees.plugins.credentials.SystemCredentialsProvider
 import com.cloudbees.plugins.credentials.domains.Domain
-import com.cloudbees.plugins.credentials.impl.StringCredentialsImpl
+import org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl
+import hudson.plugins.sonar.SonarGlobalConfiguration
+import hudson.plugins.sonar.SonarInstallation
+import hudson.plugins.sonar.model.TriggersConfig
 
 def log = { msg -> println("[init.groovy] " + msg) }
 
@@ -16,29 +19,11 @@ def sonarUrl = System.getenv('SONARQUBE_URL') ?: 'http://sonarqube:9000'
 def sonarToken = System.getenv('SONARQUBE_TOKEN') ?: ''
 
 try {
-    def clazz = Class.forName('org.jenkinsci.plugins.sonarqube.SonarQubeInstallation')
-    def descriptor = jenkins.getDescriptorByType(clazz)
-    def instalacion = null
-
-    for (args in [
-        ['SonarQube', sonarUrl, sonarToken, ''],
-        ['SonarQube', sonarUrl, sonarToken],
-        ['SonarQube', sonarUrl, Secret.fromString(sonarToken), '']
-    ]) {
-        try {
-            instalacion = clazz.getConstructor(args.collect { it.getClass() }.toArray() as Class[]).newInstance(*args)
-            break
-        } catch (Throwable ignored) {
-        }
-    }
-
-    if (instalacion != null) {
-        descriptor.setInstallations(instalacion as Object[])
-        descriptor.save()
-        log("SonarQube registrado: " + sonarUrl)
-    } else {
-        log("AVISO: no se pudo instanciar SonarQubeInstallation (se usaran -Dsonar.* explicitos)")
-    }
+    def globalConfig = SonarGlobalConfiguration.get()
+    def instalacion = new SonarInstallation('SonarQube', sonarUrl, sonarToken, '', '', new TriggersConfig(), '')
+    globalConfig.setInstallations(instalacion)
+    globalConfig.save()
+    log("SonarQube registrado: " + sonarUrl)
 } catch (Throwable t) {
     log("AVISO: SonarQube no configurado -> " + t.message)
 }
@@ -49,19 +34,20 @@ try {
 try {
     def store = jenkins.getExtensionList(SystemCredentialsProvider)[0].getStore()
     def dominio = Domain.global()
+    def existentes = store.getCredentials(dominio)*.id
 
     def slackUrl = System.getenv('SLACK_WEBHOOK_URL')
-    if (slackUrl) {
-        def nueva = new StringCredentialsImpl(CredentialsScope.GLOBAL, 'slack-webhook-url',
-                'Slack Incoming Webhook (Reto Pipeline de Calidad)', Secret.fromString(slackUrl))
-        store.addCredentials(dominio, nueva)
+    if (slackUrl && !existentes.contains('slack-webhook-url')) {
+        store.addCredentials(dominio,
+            new StringCredentialsImpl(CredentialsScope.GLOBAL, 'slack-webhook-url',
+                'Slack Incoming Webhook (Reto Pipeline de Calidad)', Secret.fromString(slackUrl)))
         log("Credencial slack-webhook-url creada")
     }
 
-    if (sonarToken) {
-        def token = new StringCredentialsImpl(CredentialsScope.GLOBAL, 'sonar-token',
-                'Token de analisis SonarQube', Secret.fromString(sonarToken))
-        store.addCredentials(dominio, token)
+    if (sonarToken && !existentes.contains('sonar-token')) {
+        store.addCredentials(dominio,
+            new StringCredentialsImpl(CredentialsScope.GLOBAL, 'sonar-token',
+                'Token de analisis SonarQube', Secret.fromString(sonarToken)))
         log("Credencial sonar-token creada")
     }
 } catch (Throwable t) {

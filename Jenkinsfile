@@ -82,6 +82,7 @@ pipeline {
             steps {
                 sh '''
                     set -e
+                    export HEAP="-Xms256m -Xmx512m -XX:MaxMetaspaceSize=256m"
                     mkdir -p $JMETER_OUT/reporte-html
                     rm -rf $JMETER_OUT/reporte-html/*
                     $JMETER_HOME/bin/jmeter -n \
