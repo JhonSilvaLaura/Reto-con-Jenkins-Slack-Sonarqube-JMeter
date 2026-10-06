@@ -1,0 +1,21 @@
+TOTAL: 5
+---
+java:S1186 | CODE_SMELL | CRITICAL | debt None min | LoginRequest.java line 8
+MSG: Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.
+COMPONENT: psw-pipeline-base:src/main/java/vallegrande/edu/pe/model/LoginRequest.java
+---
+java:S1066 | CODE_SMELL | MAJOR | debt None min | ProductService.java line 55
+MSG: Merge this if statement with the enclosing one.
+COMPONENT: psw-pipeline-base:src/main/java/vallegrande/edu/pe/service/ProductService.java
+---
+java:S1066 | CODE_SMELL | MAJOR | debt None min | ProductService.java line 57
+MSG: Merge this if statement with the enclosing one.
+COMPONENT: psw-pipeline-base:src/main/java/vallegrande/edu/pe/service/ProductService.java
+---
+java:S1066 | CODE_SMELL | MAJOR | debt None min | ProductService.java line 59
+MSG: Merge this if statement with the enclosing one.
+COMPONENT: psw-pipeline-base:src/main/java/vallegrande/edu/pe/service/ProductService.java
+---
+java:S1066 | CODE_SMELL | MAJOR | debt None min | ProductService.java line 61
+MSG: Merge this if statement with the enclosing one.
+COMPONENT: psw-pipeline-base:src/main/java/vallegrande/edu/pe/service/ProductService.java

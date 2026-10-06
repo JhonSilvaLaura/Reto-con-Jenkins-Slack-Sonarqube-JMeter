@@ -1,0 +1,23 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.5.6)
+
+2026-10-06T15:57:46.482-05:00  INFO 200236 --- [psw-pipeline-base] [           main] v.edu.pe.PswPipelineBaseApplication      : Starting PswPipelineBaseApplication v0.0.1-SNAPSHOT using Java 21.0.12.1 with PID 200236 (/home/silva/Downloads/00_PSW_ValeryChumpitaz-main/PSW_Pipeline_Base/target/psw-pipeline-base-0.0.1-SNAPSHOT.jar started by silva in /home/silva/Downloads/00_PSW_ValeryChumpitaz-main/PSW_Pipeline_Base)
+2026-10-06T15:57:46.496-05:00  INFO 200236 --- [psw-pipeline-base] [           main] v.edu.pe.PswPipelineBaseApplication      : No active profile set, falling back to 1 default profile: "default"
+2026-10-06T15:57:50.646-05:00  INFO 200236 --- [psw-pipeline-base] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8085 (http)
+2026-10-06T15:57:50.686-05:00  INFO 200236 --- [psw-pipeline-base] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-06T15:57:50.687-05:00  INFO 200236 --- [psw-pipeline-base] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2026-10-06T15:57:50.772-05:00  INFO 200236 --- [psw-pipeline-base] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-10-06T15:57:50.776-05:00  INFO 200236 --- [psw-pipeline-base] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4098 ms
+2026-10-06T15:57:52.507-05:00  INFO 200236 --- [psw-pipeline-base] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+2026-10-06T15:57:52.701-05:00  INFO 200236 --- [psw-pipeline-base] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8085 (http) with context path '/'
+2026-10-06T15:57:52.744-05:00  INFO 200236 --- [psw-pipeline-base] [           main] v.edu.pe.PswPipelineBaseApplication      : Started PswPipelineBaseApplication in 7.907 seconds (process running for 9.15)
+2026-10-06T15:57:58.852-05:00  INFO 200236 --- [psw-pipeline-base] [nio-8085-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-06T15:57:58.852-05:00  INFO 200236 --- [psw-pipeline-base] [nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-06T15:57:58.855-05:00  INFO 200236 --- [psw-pipeline-base] [nio-8085-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms

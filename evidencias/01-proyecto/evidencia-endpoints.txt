@@ -1,0 +1,18 @@
+=== EVIDENCIA 1: Proyecto ejecutándose ===
+Fecha: Tue Oct  6 03:58:04 PM -05 2026
+
+--- Health (actuator) ---
+{"status":"UP","components":{"diskSpace":{"status":"UP","details":{"total":859696889856,"free":663489695744,"threshold":10485760,"path":"/home/silva/Downloads/00_PSW_ValeryChumpitaz-main/PSW_Pipeline_Base/.","exists":true}},"ping":{"status":"UP"},"ssl":{"status":"UP","details":{"validChains":[],"invalidChains":[]}}}}
+HTTP 200
+
+--- GET /products ---
+[{"id":1,"name":"Laptop","price":2500.0},{"id":2,"name":"Mouse","price":80.0},{"id":3,"name":"Teclado","price":120.0},{"id":4,"name":"Monitor","price":850.0},{"id":5,"name":"Audífonos","price":150.0}]
+HTTP 200 | Tiempo: 0.027945s
+
+--- POST /login (credenciales válidas admin/123456) ---
+{"success":true,"message":"Login correcto","token":"ABC123XYZ"}
+HTTP 200 | Tiempo: 0.090561s
+
+--- POST /login (credenciales inválidas) ---
+{"success":false,"message":"Credenciales incorrectas"}
+HTTP 200 | Tiempo: 0.007039s
