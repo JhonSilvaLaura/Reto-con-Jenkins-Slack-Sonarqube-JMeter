@@ -85,6 +85,7 @@ pipeline {
                     export HEAP="-Xms256m -Xmx512m -XX:MaxMetaspaceSize=256m"
                     mkdir -p $JMETER_OUT/reporte-html
                     rm -rf $JMETER_OUT/reporte-html/*
+                    rm -f $JMETER_OUT/resultados-pipeline.jtl
                     $JMETER_HOME/bin/jmeter -n \
                       -t $JMETER_PLAN \
                       -l $JMETER_OUT/resultados-pipeline.jtl \
@@ -135,7 +136,7 @@ pipeline {
                             [title: 'Rama', value: 'develop', short: true],
                             [title: 'Resultado', value: estado, short: true],
                             [title: 'Duracion', value: "${currentBuild.durationString}", short: true],
-                            [title: 'Jenkins', value: "${env.BUILD_URL}", short: false]
+                            [title: 'Jenkins', value: "${env.BUILD_URL ?: 'http://localhost:8080/job/reto-pipeline-calidad/' + env.BUILD_NUMBER + '/'}", short: false]
                         ]
                     ]]
                 ]
